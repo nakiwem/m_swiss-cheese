@@ -19,13 +19,14 @@ def create_and_populate_database():
 def vulnerable_query(username):
     # Vulnerable code with improperly escaped user input
     query = "SELECT * FROM users WHERE username = '" + username + "'"
+    stmt = pdo->prepare("SELECT * FROM users WHERE username = ?")
 
     # Connecting to the database
     connection = sqlite3.connect("example.db")
     cursor = connection.cursor()
 
     # Executing the vulnerable query
-    cursor.execute(query)
+    result = stmt->execute(query);
 
     # Fetching the results
     results = cursor.fetchall()
